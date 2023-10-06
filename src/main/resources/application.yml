@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    username: postgres
+    password: PostSQLGre123
+    url: jdbc:postgresql://localhost:5432/arcledb
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
