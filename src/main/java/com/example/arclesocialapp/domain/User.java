@@ -1,11 +1,15 @@
 package com.example.arclesocialapp.domain;
 
 import com.example.arclesocialapp.annotation.LaterThanYear;
+import com.example.arclesocialapp.enumeration.CharacterTrait;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,7 +20,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -49,6 +56,13 @@ public class User {
     @Column(unique = true)
     @Pattern(regexp="(^$|[0-9]{9})", message = "{phone.pattern}")
     private String phoneNumber;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "user_character_trait")
+    @Column(name = "character_trait")
+    @Enumerated(STRING)
+    @Size(min = 3, max = 3, message = "{characterTraits.size}")
+    private Set<CharacterTrait> characterTraits;
 
     @Size(max = 255, message = "{description.size}")
     private String description;
