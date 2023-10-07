@@ -1,9 +1,12 @@
 package com.example.arclesocialapp.annotation;
 
+import lombok.Setter;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 
+@Setter
 public class LaterThanYearValidator implements ConstraintValidator<LaterThanYear, LocalDate> {
 
     private int value;
