@@ -2,6 +2,7 @@ package com.example.arclesocialapp.domain;
 
 import com.example.arclesocialapp.annotation.LaterThanYear;
 import com.example.arclesocialapp.enumeration.CharacterTrait;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +13,13 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -57,6 +58,9 @@ public class User {
     @Pattern(regexp="(^$|[0-9]{9})", message = "{phone.pattern}")
     private String phoneNumber;
 
+    @Size(max = 255, message = "{description.size}")
+    private String description;
+
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "user_character_trait")
     @Column(name = "character_trait")
@@ -64,6 +68,7 @@ public class User {
     @Size(min = 3, max = 3, message = "{characterTraits.size}")
     private Set<CharacterTrait> characterTraits;
 
-    @Size(max = 255, message = "{description.size}")
-    private String description;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "participants")
+    private Set<Happening> happenings;
 }
