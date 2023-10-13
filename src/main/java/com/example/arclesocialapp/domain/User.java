@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -67,6 +68,9 @@ public class User {
     @Enumerated(STRING)
     @Size(min = 3, max = 3, message = "{characterTraits.size}")
     private Set<CharacterTrait> characterTraits;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Review> reviews;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "participants")
