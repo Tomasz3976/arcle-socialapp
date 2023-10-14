@@ -1,6 +1,7 @@
 package com.example.arclesocialapp.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -18,23 +19,24 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Review {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @NotNull(message = "{authorId.notNull}")
+    @NotNull(message = "Author id {notNullMessage}")
     private Long authorId;
 
-    @Min(value = 1, message = "{rating.tooLow}")
-    @Max(value = 5, message = "{rating.tooHigh}")
+    @Min(value = 1, message = "{rating.tooLowMessage}")
+    @Max(value = 10, message = "{rating.tooHighMessage}")
     private Byte rating;
 
-    @Size(max = 255, message = "{description.size}")
+    @Size(max = 255, message = "{description.sizeMessage}")
     private String description;
 
-    @NotNull(message = "{user.notNull}")
+    @NotNull(message = "Corresponding user {notNullMessage}")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

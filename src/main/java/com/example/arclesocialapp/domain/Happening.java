@@ -32,13 +32,13 @@ public class Happening {
     @Valid
     private Spot spot;
 
-    @NotNull(message = "{startTime.notNull}")
+    @NotNull(message = "Start time {notNullMessage}")
     private LocalDateTime startTime;
 
-    @Size(max = 255, message = "{description.size}")
+    @Size(max = 255, message = "{description.sizeMessage}")
     private String description;
 
-    @NotNull(message = "{status.notNull}")
+    @NotNull(message = "Happening status {notNullMessage}")
     @Enumerated(STRING)
     private HappeningStatus status;
 

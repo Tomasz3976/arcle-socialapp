@@ -4,7 +4,9 @@ import com.example.arclesocialapp.annotation.LaterThanYear;
 import com.example.arclesocialapp.enumeration.CharacterTrait;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -29,9 +32,11 @@ import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "app_user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "app_user")
+@Builder
+@Setter
 public class User {
 
     @Id
@@ -39,34 +44,40 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "{username.notBlank}")
-    @Size(min = 5, max = 20, message = "{username.size}")
+    @NotBlank(message = "Username {notBlankMessage}")
+    @Size(min = 5, max = 20, message = "{username.sizeMessage}")
     private String username;
 
-    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}",
-             message = "{password.pattern}")
+    @NotBlank(message = "Password {notBlankMessage}")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%*?^&])[A-Za-z\\d@#$!%*?^&]{10,}$",
+             message = "{password.patternMessage}")
     private String password;
 
-    @Past
-    @LaterThanYear(1900)
+    @NotNull(message = "Date of birth {notNullMessage}")
+    @Past(message = "{dateOfBirth.pastMessage}")
+    @LaterThanYear(value = 1900, message = "{dateOfBirth.LaterThanYearMessage}")
     private LocalDate dateOfBirth;
 
     @Column(unique = true)
-    @Email
+    @NotBlank(message = "Email {notBlankMessage}")
+    @Email(message = "{emailMessage}")
     private String email;
 
     @Column(unique = true)
-    @Pattern(regexp="(^$|[0-9]{9})", message = "{phone.pattern}")
+    @NotBlank(message = "Phone number {notBlankMessage}")
+    @Pattern(regexp="(^$|[0-9]{9})", message = "{phone.patternMessage}")
     private String phoneNumber;
 
-    @Size(max = 255, message = "{description.size}")
+    @NotBlank(message = "Description {notBlankMessage}")
+    @Size(max = 255, message = "{description.sizeMessage}")
     private String description;
 
     @ElementCollection(fetch = EAGER)
     @CollectionTable(name = "user_character_trait")
     @Column(name = "character_trait")
     @Enumerated(STRING)
-    @Size(min = 3, max = 3, message = "{characterTraits.size}")
+    @NotNull(message = "Character traits {notNullMessage}")
+    @Size(min = 3, max = 3, message = "{characterTraits.sizeMessage}")
     private Set<CharacterTrait> characterTraits;
 
     @OneToMany(mappedBy = "user")

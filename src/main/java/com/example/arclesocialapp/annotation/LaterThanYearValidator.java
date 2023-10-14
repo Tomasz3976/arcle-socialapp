@@ -18,6 +18,7 @@ public class LaterThanYearValidator implements ConstraintValidator<LaterThanYear
 
     @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext constraintValidatorContext) {
+        if (date == null) return false;
         return date.getYear() >= value;
     }
 }
