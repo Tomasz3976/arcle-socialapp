@@ -33,7 +33,7 @@ public class Review {
     @Max(value = 10, message = "{rating.tooHighMessage}")
     private Byte rating;
 
-    @Size(max = 255, message = "{description.sizeMessage}")
+    @Size(max = 255, message = "Description {maxSizeMessage}")
     private String description;
 
     @NotNull(message = "Corresponding user {notNullMessage}")

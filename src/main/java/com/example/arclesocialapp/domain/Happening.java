@@ -35,7 +35,7 @@ public class Happening {
     @NotNull(message = "Start time {notNullMessage}")
     private LocalDateTime startTime;
 
-    @Size(max = 255, message = "{description.sizeMessage}")
+    @Size(max = 255, message = "Description {maxSizeMessage}")
     private String description;
 
     @NotNull(message = "Happening status {notNullMessage}")

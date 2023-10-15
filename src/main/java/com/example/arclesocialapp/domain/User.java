@@ -49,7 +49,7 @@ public class User {
     private String username;
 
     @NotBlank(message = "Password {notBlankMessage}")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$!%*?^&])[A-Za-z\\d@#$!%*?^&]{10,}$",
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*?])[A-Za-z\\d!@#$%^&*?]{10,}$",
              message = "{password.patternMessage}")
     private String password;
 
@@ -65,11 +65,12 @@ public class User {
 
     @Column(unique = true)
     @NotBlank(message = "Phone number {notBlankMessage}")
-    @Pattern(regexp="(^$|[0-9]{9})", message = "{phone.patternMessage}")
+    @Size(max = 9, message = "Phone number {maxSizeMessage}")
+    @Pattern(regexp="(^$|[0-9]{9})", message = "{phoneNumber.patternMessage}")
     private String phoneNumber;
 
     @NotBlank(message = "Description {notBlankMessage}")
-    @Size(max = 255, message = "{description.sizeMessage}")
+    @Size(max = 255, message = "Description {maxSizeMessage}")
     private String description;
 
     @ElementCollection(fetch = EAGER)
