@@ -35,8 +35,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "app_user")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Setter
+@Builder
 public class User {
 
     @Id

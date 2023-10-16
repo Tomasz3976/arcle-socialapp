@@ -2,6 +2,7 @@ package com.example.arclesocialapp.validation
 
 import com.example.arclesocialapp.domain.User
 import com.example.arclesocialapp.enumeration.CharacterTrait
+import com.example.arclesocialapp.data.TestDataProvider
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -17,22 +18,7 @@ class UserValidationTest extends Specification {
     Validator validator
 
     def setup() {
-        user = User.builder()
-                .username("MikeRoger52")
-                .password("AppleJuice61*")
-                .dateOfBirth(LocalDate.of(1995, 7, 11))
-                .email("MikeRoger988@gmail.com")
-                .phoneNumber("762901573")
-                .description("Hey there, I’m Mike, and I live for those epic party moments!" +
-                             "I’m the guy who’ll turn any gathering into a non-stop thrill ride."
-                )
-                .characterTraits(
-                        [CharacterTrait.ENERGETIC,
-                         CharacterTrait.LEADING,
-                         CharacterTrait.SOCIABLE] as Set
-                )
-                .build()
-
+        user = TestDataProvider.getUser()
         validator = Validation.buildDefaultValidatorFactory().getValidator()
     }
 
