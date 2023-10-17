@@ -1,5 +1,6 @@
-package com.example.arclesocialapp.annotation;
+package com.example.arclesocialapp.validator;
 
+import com.example.arclesocialapp.annotation.LaterThanYear;
 import lombok.Setter;
 
 import javax.validation.ConstraintValidator;

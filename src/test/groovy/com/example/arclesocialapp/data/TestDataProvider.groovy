@@ -1,10 +1,14 @@
 package com.example.arclesocialapp.data
 
+import com.example.arclesocialapp.domain.Happening
 import com.example.arclesocialapp.domain.Review
+import com.example.arclesocialapp.domain.Spot
 import com.example.arclesocialapp.domain.User
 import com.example.arclesocialapp.enumeration.CharacterTrait
+import com.example.arclesocialapp.enumeration.HappeningStatus
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 class TestDataProvider {
 
@@ -37,6 +41,23 @@ class TestDataProvider {
                                 " He's the kind of guy who can light up any room with his positive energy."
                 )
                 .user(getUser())
+                .build()
+    }
+
+    static Happening getHappening() {
+        return Happening.builder()
+                .spot(Spot.builder().build())
+                .startTime(LocalDateTime.of(2024, 9, 12, 17, 30))
+                .description(
+                        "We're throwing a party that's going to be the talk of the campus." +
+                        " Picture this: good vibes, good company, and good times all night long." +
+                        " The crowd will be a mix of amazing folks, both guys and pretty girls," +
+                        " ready to have a blast. Our drinks selection is top-notch, with everything" +
+                        " from classic cocktails to craft beers. And we've got a signature drink" +
+                        " menu that'll blow your mind. Whether you're into dancing, mingling," +
+                        " or simply enjoying the atmosphere, there's something for everyone."
+                )
+                .status(HappeningStatus.SCHEDULED)
                 .build()
     }
 }

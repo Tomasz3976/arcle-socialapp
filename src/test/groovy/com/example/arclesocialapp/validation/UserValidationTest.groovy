@@ -90,9 +90,9 @@ class UserValidationTest extends Specification {
             violations.size() > 0
 
         where: 'incorrect parameters'
-            dateOfBirth << [LocalDate.of(1899, 4, 17),
-                            LocalDate.now().plusYears(3). plusMonths(5),
-                            null]
+            dateOfBirth << [null,
+                            LocalDate.of(1899, 4, 17),
+                            LocalDate.now().plusYears(3). plusMonths(5)]
     }
 
     def 'test should not trigger any violation when date of birth is correct'() {

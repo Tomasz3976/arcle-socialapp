@@ -70,8 +70,8 @@ public class User {
     @Pattern(regexp="(^$|[0-9]{9})", message = "{phoneNumber.patternMessage}")
     private String phoneNumber;
 
-    @NotBlank(message = "Description {notBlankMessage}")
-    @Size(max = 255, message = "Description {maxSizeMessage}")
+    @NotBlank(message = "User description {notBlankMessage}")
+    @Size(max = 255, message = "User description {maxSizeMessage}")
     private String description;
 
     @ElementCollection(fetch = EAGER)
@@ -86,6 +86,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Review> reviews;
 
+    @Valid
     @JsonIgnore
     @ManyToMany(mappedBy = "participants")
     private Set<Happening> happenings;

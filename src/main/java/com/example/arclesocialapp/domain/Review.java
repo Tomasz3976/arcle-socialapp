@@ -40,8 +40,8 @@ public class Review {
     @Max(value = 10, message = "{rating.tooHighMessage}")
     private Byte rating;
 
-    @NotBlank(message = "Description {notBlankMessage}")
-    @Size(max = 255, message = "Description {maxSizeMessage}")
+    @NotBlank(message = "Review description {notBlankMessage}")
+    @Size(max = 255, message = "Review description {maxSizeMessage}")
     private String description;
 
     @Valid
