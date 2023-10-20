@@ -126,6 +126,75 @@ class HappeningValidationTest extends Specification {
                             "Great party my guys!"]
     }
 
+    def 'test should trigger violation when number of photo paths is incorrect'() {
+        given: 'photo paths setting'
+            def paths = photoPaths
+            happening.setPhotos(paths)
+
+        when: 'passing incorrect photo paths'
+            def violations = validator.validate(happening)
+
+        then: 'violations should be triggered'
+            violations.size() > 0
+
+        where: 'incorrect parameters'
+            photoPaths << [
+                    [
+                     "happening53_11_07_2022_094.jpg", "happening53_11_07_2022_088.jpg",
+                     "happening53_11_07_2022_145.jpg", "happening53_11_07_2022_198.jpg",
+                     "happening53_11_07_2022_021.jpg", "happening53_11_07_2022_325.jpg"
+                    ] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_473.jpg", "happening53_11_07_2022_221.jpg",
+                     "happening53_11_07_2022_096.jpg", "happening53_11_07_2022_054.jpg",
+                     "happening53_11_07_2022_422.jpg", "happening53_11_07_2022_058.jpg",
+                     "happening53_11_07_2022_119.jpg"
+                    ] as Set
+            ]
+    }
+
+    def 'test should not trigger any violation when number of photo paths is correct'() {
+        given: 'photo paths setting'
+            def paths = photoPaths
+            happening.setPhotos(paths)
+
+        when: 'passing correct photo paths'
+            def violations = validator.validate(happening)
+
+        then: 'no violations'
+            violations.isEmpty()
+
+        where: 'correct parameters'
+            photoPaths << [
+                    [] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_330.jpg"
+                    ] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_286.jpg", "happening53_11_07_2022_108.jpg"
+                    ] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_768.jpg", "happening53_11_07_2022_903.jpg",
+                     "happening53_11_07_2022_884.jpg"
+                    ] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_187.jpg", "happening53_11_07_2022_100.jpg",
+                     "happening53_11_07_2022_289.jpg", "happening53_11_07_2022_307.jpg"
+                    ] as Set
+                    ,
+                    [
+                     "happening53_11_07_2022_409.jpg", "happening53_11_07_2022_381.jpg",
+                     "happening53_11_07_2022_294.jpg", "happening53_11_07_2022_283.jpg",
+                     "happening53_11_07_2022_117.jpg"
+                    ] as Set
+            ]
+    }
+
     def 'test should trigger violation when happening status is null'() {
         given: 'status setting'
             happening.setStatus(null)

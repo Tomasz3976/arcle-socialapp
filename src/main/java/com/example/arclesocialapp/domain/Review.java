@@ -44,6 +44,9 @@ public class Review {
     @Size(max = 255, message = "Review description {maxSizeMessage}")
     private String description;
 
+    @NotBlank(message = "Photo path {notBlankMessage}")
+    private String photo;
+
     @Valid
     @NotNull(message = "Corresponding user {notNullMessage}")
     @ManyToOne

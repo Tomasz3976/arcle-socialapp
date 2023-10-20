@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -21,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -46,6 +50,12 @@ public class Happening {
     @NotBlank(message = "Happening description {notBlankMessage}")
     @Size(max = 768, message = "Happening description {maxSizeMessage}")
     private String description;
+
+    @ElementCollection(fetch = EAGER)
+    @CollectionTable(name = "happening_photos")
+    @Column(name = "photo_path")
+    @Size(max = 5, message = "photos.sizeMessage")
+    private Set<String> photos;
 
     @NotNull(message = "Happening status {notNullMessage}")
     @Enumerated(STRING)

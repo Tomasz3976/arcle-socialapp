@@ -213,6 +213,34 @@ class UserValidationTest extends Specification {
                             "My own description guys!"]
     }
 
+    def 'test should trigger violation when photo path is blank'() {
+        given: 'photo path setting'
+            user.setPhoto(photoPath)
+
+        when: 'passing incorrect photo path'
+            def violations = validator.validate(user)
+
+        then: 'violations should be triggered'
+            violations.size() > 0
+
+        where: 'incorrect parameters'
+            photoPath << [null, "", " "]
+    }
+
+    def 'test should not trigger any violation when photo path is correct'() {
+        given: 'photo path setting'
+            user.setPhoto(photoPath)
+
+        when: 'passing correct photo path'
+            def violations = validator.validate(user)
+
+        then: 'no violations'
+            violations.isEmpty()
+
+        where: 'correct parameters'
+            photoPath << ["user16_06_08_2021_954", "user16_09_10_2022_035"]
+    }
+
     def 'test should trigger violation when number of character traits is incorrect'() {
         given: 'character traits setting'
             def traits = characterTraits

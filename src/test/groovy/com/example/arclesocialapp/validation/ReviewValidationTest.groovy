@@ -120,4 +120,32 @@ class ReviewValidationTest extends Specification {
                             ,
                             "This guy is crazy!"]
     }
+
+    def 'test should trigger violation when photo path is blank'() {
+        given: 'photo path setting'
+            review.setPhoto(photoPath)
+
+        when: 'passing incorrect photo path'
+            def violations = validator.validate(review)
+
+        then: 'violations should be triggered'
+            violations.size() > 0
+
+        where: 'incorrect parameters'
+            photoPath << [null, "", " "]
+    }
+
+    def 'test should not trigger any violation when photo path is correct'() {
+        given: 'photo path setting'
+            review.setPhoto(photoPath)
+
+        when: 'passing correct photo path'
+            def violations = validator.validate(review)
+
+        then: 'no violations'
+            violations.isEmpty()
+
+        where: 'correct parameters'
+            photoPath << ["review29_02_11_2021_409", "review29_17_01_2021_161"]
+    }
 }

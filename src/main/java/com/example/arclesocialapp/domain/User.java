@@ -74,8 +74,11 @@ public class User {
     @Size(max = 255, message = "User description {maxSizeMessage}")
     private String description;
 
+    @NotBlank(message = "Photo path {notBlankMessage}")
+    private String photo;
+
     @ElementCollection(fetch = EAGER)
-    @CollectionTable(name = "user_character_trait")
+    @CollectionTable(name = "user_character_traits")
     @Column(name = "character_trait")
     @Enumerated(STRING)
     @NotNull(message = "Character traits {notNullMessage}")
