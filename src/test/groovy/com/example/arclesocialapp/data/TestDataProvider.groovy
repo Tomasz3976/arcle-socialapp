@@ -21,7 +21,7 @@ class TestDataProvider {
                 .phoneNumber("762901573")
                 .description(
                         "Hey there, I’m Mike, and I live for those epic party moments!" +
-                                " I’m the guy who’ll turn any gathering into a non-stop thrill ride."
+                        " I’m the guy who’ll turn any gathering into a non-stop thrill ride."
                 )
                 .photo("user16_wednesday_selfie_04.jpg")
                 .characterTraits(
@@ -38,8 +38,8 @@ class TestDataProvider {
                 .rating(8 as Byte)
                 .description(
                         "I gave Mike an 8 out of 10 stars because he's a total party legend!" +
-                                " What sets Mike apart is his unwavering enthusiasm and charisma." +
-                                " He's the kind of guy who can light up any room with his positive energy."
+                        " What sets Mike apart is his unwavering enthusiasm and charisma." +
+                        " He's the kind of guy who can light up any room with his positive energy."
                 )
                 .photo("review29_03_04_2022_006.jpg")
                 .user(getUser())

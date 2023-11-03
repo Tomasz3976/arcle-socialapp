@@ -47,7 +47,7 @@ public class Happening {
     @LaterThanYear(value = 2020, message = "{startTime.laterThanYearMessage}")
     private LocalDateTime startTime;
 
-    @NotBlank(message = "Happening description {notBlankMessage}")
+    @NotBlank(message = "Happening description {notEmptyMessage}")
     @Size(max = 768, message = "Happening description {maxSizeMessage}")
     private String description;
 

@@ -22,7 +22,7 @@ class UserValidationTest extends Specification {
         validator = Validation.buildDefaultValidatorFactory().getValidator()
     }
 
-    def 'test should trigger violation when username is blank or wrong size'() {
+    def 'test should trigger violation when username is blank or invalid size'() {
         given: 'username setting'
             user.setUsername(username)
 
@@ -33,7 +33,7 @@ class UserValidationTest extends Specification {
             violations.size() > 0
 
         where: 'incorrect parameters'
-            username << [null, "", " ", "paul", "JohnMarcusGeorgeOscar"]
+            username << [null, "", " ", "     ", "paul", "JohnMarcusGeorgeOscar"]
     }
 
     def 'test should not trigger any violation when username is correct'() {
@@ -61,8 +61,8 @@ class UserValidationTest extends Specification {
             violations.size() > 0
 
         where: 'incorrect parameters'
-        password << [null, "", " ", "password", "StrongPass", "pass123",
-                     "Pass1455", "OOO", "88", "RTP44", "#&", "a%&", "A**", "5^"]
+            password << [null, "", " ", "password", "StrongPass", "pass123",
+                        "Pass1455", "OOO", "88", "RTP44", "#&", "a%&", "A**", "5^"]
     }
 
     def 'test should not trigger any violation when password is correct'() {
@@ -152,7 +152,7 @@ class UserValidationTest extends Specification {
             violations.size() > 0
 
         where: 'incorrect parameters'
-            phoneNumber << [null, "", " ", "1", "78424556", "9834567789", "676276376322636328", "a576hf"]
+            phoneNumber << [null, "", " ", "         ", "1", "78424556", "9834567789", "676276376322636328", "a576hf"]
     }
 
     def 'test should not trigger any violation when phone number is correct'() {

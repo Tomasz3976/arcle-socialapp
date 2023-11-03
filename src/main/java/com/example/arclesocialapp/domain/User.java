@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -45,11 +46,11 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    @NotBlank(message = "Username {notBlankMessage}")
+    @NotBlank(message = "Username {notEmptyMessage}")
     @Size(min = 5, max = 20, message = "{username.sizeMessage}")
     private String username;
 
-    @NotBlank(message = "Password {notBlankMessage}")
+    @NotEmpty(message = "Password {notEmptyMessage}")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*?])[A-Za-z\\d!@#$%^&*?]{10,}$",
              message = "{password.patternMessage}")
     private String password;
@@ -60,21 +61,20 @@ public class User {
     private LocalDate dateOfBirth;
 
     @Column(unique = true)
-    @NotBlank(message = "Email {notBlankMessage}")
+    @NotEmpty(message = "Email {notEmptyMessage}")
     @Email(message = "{emailMessage}")
     private String email;
 
     @Column(unique = true)
-    @NotBlank(message = "Phone number {notBlankMessage}")
-    @Size(max = 9, message = "Phone number {maxSizeMessage}")
+    @NotBlank(message = "Phone number {notEmptyMessage}")
     @Pattern(regexp="(^$|[0-9]{9})", message = "{phoneNumber.patternMessage}")
     private String phoneNumber;
 
-    @NotBlank(message = "User description {notBlankMessage}")
+    @NotBlank(message = "User description {notEmptyMessage}")
     @Size(max = 255, message = "User description {maxSizeMessage}")
     private String description;
 
-    @NotBlank(message = "Photo path {notBlankMessage}")
+    @NotBlank(message = "Photo path {notEmptyMessage}")
     private String photo;
 
     @ElementCollection(fetch = EAGER)

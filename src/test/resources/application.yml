@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: sa
+    password: ''
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: true
